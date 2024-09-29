@@ -1,5 +1,10 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "NotFound Page",
+  description: "NotFound description",
+};
+
 const NotFound = () => {
   return (
     <div>

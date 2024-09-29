@@ -4,10 +4,29 @@ import PostUser from "@/components/postUser/page";
 import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
-const SinglePostPage = async ({ params }) => {
+export const generateMetadata = async ({ params }) => {
   const { slug } = params;
 
   const post = await getPost(slug);
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
+
+const getData = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  return res.json();
+};
+
+const SinglePostPage = async ({ params }) => {
+  const { slug } = params;
+  const post = await getData(slug);
+
+  // const post = await getPost(slug);
   return (
     <div className={styles.container}>
       {post.img && (
