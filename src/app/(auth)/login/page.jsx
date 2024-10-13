@@ -1,10 +1,18 @@
-export const metadata = {
-  title: "Login Page",
-  description: "Login description",
-};
+import { handleGithubLogin } from "@/lib/action";
+import { auth, signIn } from "@/lib/auth";
 
-const LoginPage = () => {
-  return <div>LoginPage</div>;
+const LoginPage = async () => {
+  const session = await auth();
+
+  console.log(session);
+
+  return (
+    <div>
+      <form action={handleGithubLogin}>
+        <button>Login with Github</button>
+      </form>
+    </div>
+  );
 };
 
 export default LoginPage;
